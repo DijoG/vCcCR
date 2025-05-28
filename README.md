@@ -21,7 +21,33 @@ devtools::install_github("DijoG/vCcCR")
 
 ## Usage example
 
-Import data, POLY with multiple features, and VCR the binarized raster file:
+Import dependencies:
+
+```R
+require(terra)        # For raster data handling
+require(sf)           # For spatial vector data handling
+require(exactextractr) # For fast raster exact extraction
+require(dplyr)        # For data manipulation (e.g., mutate, filter, group_by, summarise)
+require(progress)     # For progress bars
+require(cli)          # For formatted command-line output
+require(rlang)        # For quosures and unquoting (e.g., !!sym)
+require(purrr)        # For functional programming (e.g., map, map_dfr)
+require(tictoc)       # For timing code execution
+require(tibble)       # For add_column() 
+```
+
+Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites:
+
+```R
+# Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
+# obtained from Google Earth Engine
+# Output is the updated inputSHAPE with the computed VCr_date attributes
+vCcCR::get_VCr(inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
+               inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.geojson", 
+               outputSHAPE = ".../22052025_Riyadh_METROPOLITAN.geojson")
+```
+
+Compute vegetation/canopy cover ratio (%) using 0.35/0.3 resolution binarized raster file:
 
 ```R
 # A multi-featured vector file whose features are POLYGON
@@ -29,16 +55,15 @@ POLY <- sf::st_read(".../TestPoly.geojson") %>%
   sf::st_make_valid() %>%      
   sf::st_cast("POLYGON") 
 
-# Vegetation Cover (raster with pixel values 1 and NA/0, 1 indicating vagetetion or canopy)
+# Vegetation Cover (binarized raster with pixel values 1 and NA/0, 1 indicating vagetetion or canopy)
 VCR <- terra::rast(".../VC_EPSG32638.tif")
 ```
 
 Run the vegetation/canopy ratio (%) computation for mixed (large and small) or only large or small polygons:
 
 ```R
-# Example: Run the vegetation processing for large polys
 tic("Total Vegetation Processing Time")
-get_VEGETATION(
+vCcCR::get_VEGETATION(
   polygons = POLY, 
   veg_raster = VCR,
   output_path = ".../CC_resultest.gpkg",
