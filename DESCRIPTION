@@ -23,5 +23,4 @@ Imports:
     cli,
     progress,
     dismo
-Suggests:
-    testthat (>= 3.0.0) # For testing, not strictly required for user
+
