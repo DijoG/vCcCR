@@ -16,7 +16,7 @@ You can install the development version of `vCcCR` directly from GitHub using `d
 # install.packages("devtools")
 
 # Install vCcCR
-devtools::install_github("DijoGergo/vCcCR")
+devtools::install_github("DijoG/vCcCR")
 ```
 
 ## Usage example
