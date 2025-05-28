@@ -36,7 +36,7 @@ require(tictoc)       # For timing code execution
 require(tibble)       # For add_column() 
 ```
 
-Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites:
+Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites (with singe-feature input vector):
 
 ```R
 # Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
@@ -45,15 +45,18 @@ Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites
 vCcCR::get_VCr(inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
                inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.geojson", 
                outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN.geojson")
-               
-# Multi-featured vector input:
+```
+
+Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites (with multi-feature input vector):
+
+```R
 get_VCr(inputRAST = ".../VC_2024/VC_Annual_2024_thr_0_15.tif",
         inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/05112024_GRP_ARABIC — 20241105_GRP_ARABIC_DISSsel02.geojson", 
         outputSHAPE = ".../test/05112024_GRP_ARABIC — 20241105_GRP_ARABIC_DISSsel02.geojson",
         id_field = "NAME_ENGLI")
 ```
 
-Compute vegetation/canopy cover ratio (%) using 0.35/0.3 resolution binarized raster file:
+Compute vegetation/canopy cover ratio (%) using 0.35/0.3 resolution binarized raster file (with multi-feature complex vector):
 
 ```R
 # A multi-featured vector file whose features are POLYGON
