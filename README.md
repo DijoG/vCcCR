@@ -24,6 +24,7 @@ devtools::install_github("DijoG/vCcCR")
 Import data, POLY with multiple features, and VCR the binarized raster file:
 
 ```R
+# A multi-feautured vector file whose featires are POLYGON
 POLY <- sf::st_read(".../TestPoly.geojson") %>%
   sf::st_make_valid() %>%      
   sf::st_cast("POLYGON") 
