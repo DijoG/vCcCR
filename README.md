@@ -40,8 +40,7 @@ Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites
 
 ```R
 # Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
-# obtained from Google Earth Engine
-# Output is the updated inputSHAPE (here a single-feature vector file) with the computed VCr_date attributes
+# Output is the updated inputSHAPE (here a single-feature vector file) with the computed VCr_date attributes)
 vCcCR::get_VCr(inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
                inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.geojson", 
                outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN.geojson")
@@ -59,16 +58,16 @@ vCcCR::get_VCr(inputRAST = ".../VC_2024/VC_Annual_2024_thr_0_15.tif",
 Compute vegetation/canopy cover ratio (%) using 0.35/0.3 resolution binarized raster file (with multi-feature complex vector):
 
 ```R
-# A multi-featured vector file whose features are POLYGON
+# A multi-featured mixed (large and small) vector file whose features are POLYGON
 POLY <- sf::st_read(".../TestPoly.geojson") %>%
   sf::st_make_valid() %>%      
   sf::st_cast("POLYGON") 
 
-# Vegetation Cover (binarized raster with pixel values 1 and NA/0, 1 indicating vagetetion or canopy)
+# Binarized raster with pixel values 1 and NA/0, 1 indicating vagetetion or canopy
 VCR <- terra::rast(".../VC_EPSG32638.tif")
 
 
-# Run the vegetation/canopy ratio (%) computation for mixed (large and small) or only large or small polygons:
+# Run the vegetation/canopy ratio (%) computation:
 tic("Total Vegetation Processing Time")
 vCcCR::get_VEGETATION(
   polygons = POLY, 
