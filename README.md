@@ -1,4 +1,4 @@
-# vCcCR: Vegetation Canopy Cover Calculator in R
+# vCcCR: Vegetation/Canopy Cover Calculator in R
 
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
