@@ -1,0 +1,27 @@
+Package: vCcCR
+Title: Vegetation Canopy Cover Calculator in R
+Version: 0.1.0
+Authors@R:
+    person(given = "Gergő",
+           family = "Diószegi",
+           role = c("aut", "cre"),
+           email = "dijogergo@gmail.com")
+Description: A package for calculating vegetation and/or canopy cover ratios (%)
+    from raster data for polygon features. Supports processing of large
+    polygons through intelligent splitting.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports:
+    terra,
+    sf,
+    exactextractr,
+    dplyr,
+    purrr,
+    tictoc,
+    cli,
+    progress,
+    dismo
+Suggests:
+    testthat (>= 3.0.0) # For testing, not strictly required for user
