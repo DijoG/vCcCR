@@ -21,14 +21,14 @@ devtools::install_github("DijoGergo/vCcCR")
 
 ## Usage example
 
-Import data:
+Import data, POLY with multiple features, and VCR the binarized raster file:
 
 ```R
 POLY <- sf::st_read(".../TestPoly.geojson") %>%
   sf::st_make_valid() %>%      
   sf::st_cast("POLYGON") 
 
-# Vegetation Cover (raster with pixel values 1 and NA/0)
+# Vegetation Cover (raster with pixel values 1 and NA/0, 1 indicating vagetetion or canopy)
 VCR <- terra::rast(".../VC_EPSG32638.tif")
 ```
 
