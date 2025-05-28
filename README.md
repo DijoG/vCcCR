@@ -57,11 +57,9 @@ POLY <- sf::st_read(".../TestPoly.geojson") %>%
 
 # Vegetation Cover (binarized raster with pixel values 1 and NA/0, 1 indicating vagetetion or canopy)
 VCR <- terra::rast(".../VC_EPSG32638.tif")
-```
 
-Run the vegetation/canopy ratio (%) computation for mixed (large and small) or only large or small polygons:
 
-```R
+# Run the vegetation/canopy ratio (%) computation for mixed (large and small) or only large or small polygons:
 tic("Total Vegetation Processing Time")
 vCcCR::get_VEGETATION(
   polygons = POLY, 
