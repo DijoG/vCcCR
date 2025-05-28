@@ -393,20 +393,6 @@ get_VEGETATION <- function(polygons,
   }
 }
 
-# --- Data Loading and Execution Example ---
-# Make sure your file paths are correct!
-
-# Load necessary libraries
-require(terra)        # For raster data handling
-require(sf)           # For spatial vector data handling
-require(exactextractr) # For fast raster exact extraction
-require(dplyr)        # For data manipulation (e.g., mutate, filter, group_by, summarise)
-require(progress)     # For progress bars
-require(cli)          # For formatted command-line output
-require(rlang)        # For quosures and unquoting (e.g., !!sym)
-require(purrr)        # For functional programming (e.g., map, map_dfr)
-require(tictoc)       # For timing code execution
-require(tibble)       # For add_column() 
 
 
 

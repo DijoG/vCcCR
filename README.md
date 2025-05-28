@@ -24,7 +24,7 @@ devtools::install_github("DijoG/vCcCR")
 Import data, POLY with multiple features, and VCR the binarized raster file:
 
 ```R
-# A multi-feautured vector file whose features are POLYGON
+# A multi-featured vector file whose features are POLYGON
 POLY <- sf::st_read(".../TestPoly.geojson") %>%
   sf::st_make_valid() %>%      
   sf::st_cast("POLYGON") 
@@ -33,7 +33,7 @@ POLY <- sf::st_read(".../TestPoly.geojson") %>%
 VCR <- terra::rast(".../VC_EPSG32638.tif")
 ```
 
-Run the vegetation processing for mixed (large and small) or only large or small polygons:
+Run the vegetation/canopy ratio (%) computation for mixed (large and small) or only large or small polygons:
 
 ```R
 # Example: Run the vegetation processing for large polys
