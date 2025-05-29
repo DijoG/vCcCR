@@ -12,6 +12,7 @@ get_VEGETATION(
   split_threshold = 1850000,
   n_areas = 8,
   id_field = "NAME_ENGLI",
+  by_ROW = FALSE,
   return = FALSE
 )
 }
