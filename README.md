@@ -78,6 +78,7 @@ vCcCR::get_VEGETATION(
             split_threshold = 1850000,   # Polygons > 1.85 km^2 will be split in n_areas
             n_areas = 4,                 # Large polygons into n_areas sub-areas
             id_field = "NAME_ENGLI"      # Column name for polygon IDs
+            by_ROW = TRUE                # Only if you have a a very large POLY with hundreds of features
 )
 toc()
 # Total Vegetation Processing Time: 1688.43 sec elapsed

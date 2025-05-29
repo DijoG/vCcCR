@@ -29,7 +29,9 @@ get_VEGETATION(
 
 \item{id_field}{A character string, the name of the unique ID field in the polygons that has to be kept.}
 
-\item{return}{Logical, default = FALSE}
+\item{by_ROW}{Logical, TRUE triggers feature by feature processing to avoid RAM overhead (default = FALSE).}
+
+\item{return}{Logical, default = FALSE.}
 }
 \value{
 An sf object with id_field plus calculated VegArea and VegRatio attributes added.

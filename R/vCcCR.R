@@ -183,7 +183,8 @@ get_VCr <- function(inputRAST,
 #' @param split_threshold A numeric value (m^2), polygons larger than this will be split into n_areas.
 #' @param n_areas An integer, the number of sub-polygons to split large polygons into.
 #' @param id_field A character string, the name of the unique ID field in the polygons that has to be kept.
-#' @param return Logical, default = FALSE
+#' @param by_ROW Logical, TRUE triggers feature by feature processing to avoid RAM overhead (default = FALSE).
+#' @param return Logical, default = FALSE.
 #' @return An sf object with id_field plus calculated VegArea and VegRatio attributes added.
 #' @export 
 get_VEGETATION <- function(polygons,
