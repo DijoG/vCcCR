@@ -15,10 +15,10 @@ NULL
 #' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
 #' @return An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp 
 #' @export 
-get_VCr <- function(inputRAST, 
-                    inputSHAPE, 
-                    outputSHAPE = NULL, 
-                    id_field = NULL) {
+get_VCratio <- function(inputRAST, 
+                        inputSHAPE, 
+                        outputSHAPE = NULL, 
+                        id_field = NULL) {
   
   # Load required packages
   require(terra)
@@ -57,7 +57,7 @@ get_VCr <- function(inputRAST,
   # Process each monthly layer
   message("\nProcessing monthly vegetation cover ratios:")
   for(i in 1:nlyr(VCRAST)) {
-    month_name = names(VCRAST)[i]
+    month_name = gsub("\\.", "_", names(VCRAST)[i])
     vcr_colname = paste0("VCr_", month_name)
     
     tictoc::tic(paste("Month", month_name))
@@ -75,6 +75,95 @@ get_VCr <- function(inputRAST,
     result_shp[[vcr_colname]] = round(
       (veg_counts * (pixel_size^2)) / as.numeric(st_area(SHP)) * 100, 2
     )
+    
+    # Add processing time message
+    tictoc::toc()
+  }
+  
+  # Save results
+  if (is.null(outputSHAPE)) {
+    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCr.geojson")
+    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCr.shp")
+  } else {
+    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCr.geojson")
+    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCr.shp")
+  }
+  message("\nSaving output shapefile...")
+  st_write(result_shp, outputSHAPEgeoj, delete_layer = TRUE, quiet = TRUE, append = FALSE)
+  st_write(result_shp, outputSHAPEshp, delete_layer = TRUE, quiet = TRUE, append = FALSE)
+  message("Successfully saved to:\n", normalizePath(outputSHAPEgeoj), "\n", normalizePath(outputSHAPEshp))
+  
+  # Return the sf object invisibly
+  invisible(result_shp)
+}
+
+#' Calculate Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)
+#'
+#' @param inputRAST Path to the input raster stack (12 monthly vegetation cover layers)
+#' @param inputSHAPE Path to the input shapefile (polygons for analysis)
+#' @param outputSHAPE Path where to save the output shapefile with VCr attributes (default = NULL ~ same as inputSHAPE with '_VCr.geojson' extension)
+#' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
+#' @return An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp 
+#' @export 
+get_VCarea <- function(inputRAST, 
+                       inputSHAPE, 
+                       outputSHAPE = NULL, 
+                       id_field = NULL) {
+  
+  # Load required packages
+  require(terra)
+  require(sf)
+  require(exactextractr)
+  require(dplyr)
+  require(purrr)
+  require(tictoc)
+  
+  # Load data
+  message("Loading raster data...")
+  VCRAST = rast(inputRAST)
+  
+  message("Loading shapefile...")
+  SHP = st_read(inputSHAPE, quiet = TRUE)
+  if (!is.null(id_field)) {
+    SHP = SHP %>%
+      dplyr::select(all_of(id_field))
+  } else {
+    SHP = SHP %>%
+      dplyr::select(1)
+  }
+  
+  # Check CRS match
+  if(crs(VCRAST) != st_crs(SHP)$wkt) {
+    message("Reprojecting shapefile to match raster CRS...")
+    SHP = st_transform(SHP, crs(VCRAST))
+  }
+  
+  # Obtain pixel size
+  pixel_size = res(VCRAST)[1]
+  
+  # Create output object
+  result_shp = SHP
+  
+  # Process each monthly layer
+  message("\nProcessing monthly vegetation cover ratios:")
+  for(i in 1:nlyr(VCRAST)) {
+    month_name = gsub("\\.", "_", names(VCRAST)[i])
+    vcr_colname = paste0("VCa_", month_name)
+    
+    tictoc::tic(paste("Month", month_name))
+    
+    # Extract vegetation pixels (value = 1)
+    veg_counts = exact_extract(
+      VCRAST[[i]], 
+      SHP,
+      fun = function(values, coverage_fractions) {
+        sum(values == 1, na.rm = TRUE)
+      }
+    )
+    
+    # Calculate VCr and add to result
+    result_shp[[vcr_colname]] = round(
+      veg_counts * (pixel_size^2), 2)
     
     # Add processing time message
     tictoc::toc()
