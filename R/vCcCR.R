@@ -234,6 +234,8 @@ get_VEGETATION <- function(polygons,
     polygons$PolyArea = as.numeric(sf::st_area(polygons))
   }
   
+  # Obtain pixel size
+  Pix_size = terra::res(veg_raster)[1]
   # Add result columns (initialize to NA if they don't exist, though they'll be overwritten)
   # It's better to add them during the join, but if you need them present for other operations,
   # ensure they are of the correct type. For this solution, we'll rely on the join.
@@ -271,7 +273,7 @@ get_VEGETATION <- function(polygons,
         sum(.)
       
       # Calculate and store results
-      polygons$VegArea[row] = round(veg_pixels * (0.35 * 0.35), 2)
+      polygons$VegArea[row] = round(veg_pixels * (Pix_size * Pix_size), 2)
       polygons$VegRatio[row] = round(polygons$VegArea[row] / parea * 100, 2)
       
       cli::cli_alert_success("Processed {current_poly[[id_field]]}: Area = {round(parea)}, VegArea = {polygons$VegArea[row]}, VegRatio = {polygons$VegRatio[row]}")
