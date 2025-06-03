@@ -182,7 +182,7 @@ get_VCr <- function(inputRAST,
 #' @param output_path A character string, the path to save the results.
 #' @param split_threshold A numeric value (m^2), polygons larger than this will be split into n_areas.
 #' @param n_areas An integer, the number of sub-polygons to split large polygons into.
-#' @param id_field A character string, the name of the unique ID field in the polygons that has to be kept.
+#' @param id_field A character string, the name of the unique ID field in the polygons that has to be kept (default = NULL, taking the first field)
 #' @param by_ROW Logical, TRUE triggers feature by feature processing to avoid RAM overhead (default = FALSE).
 #' @param return Logical, default = FALSE.
 #' @return An sf object with id_field plus calculated VegArea and VegRatio attributes added.
@@ -192,7 +192,7 @@ get_VEGETATION <- function(polygons,
                            output_path,
                            split_threshold = 1850000,
                            n_areas = 8,
-                           id_field = "NAME_ENGLI",
+                           id_field = NULL,
                            by_ROW = FALSE,
                            return = FALSE) {
   
@@ -219,8 +219,12 @@ get_VEGETATION <- function(polygons,
   polygons = .validate_crs(polygons, veg_raster)
   
   # Check if id_field exists
-  if (!id_field %in% names(polygons)) {
+  if (!is.null(id_field)) {
+    if (!id_field %in% names(polygons)) {
     stop("The specified id_field '", id_field, "' does not exist in the polygons.")
+    }
+  } else {
+    id_field = names(polygons)[1]
   }
   
   # Create output directory if needed

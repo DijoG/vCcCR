@@ -11,7 +11,7 @@ get_VEGETATION(
   output_path,
   split_threshold = 1850000,
   n_areas = 8,
-  id_field = "NAME_ENGLI",
+  id_field = NULL,
   by_ROW = FALSE,
   return = FALSE
 )
@@ -27,7 +27,7 @@ get_VEGETATION(
 
 \item{n_areas}{An integer, the number of sub-polygons to split large polygons into.}
 
-\item{id_field}{A character string, the name of the unique ID field in the polygons that has to be kept.}
+\item{id_field}{A character string, the name of the unique ID field in the polygons that has to be kept (default = NULL, taking the first field)}
 
 \item{by_ROW}{Logical, TRUE triggers feature by feature processing to avoid RAM overhead (default = FALSE).}
 
