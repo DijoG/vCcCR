@@ -57,7 +57,7 @@ get_VCratio <- function(inputRAST,
   # Process each monthly layer
   message("\nProcessing monthly vegetation cover areas:")
   for(i in 1:nlyr(VCRAST)) {
-    month_name = gsub("-", "_", names(VCRAST)[i])
+    month_name = gsub("-", "", names(VCRAST)[i])
     vcr_colname = paste0("VCr_", month_name)
     
     tictoc::tic(paste("Month", month_name))
@@ -147,7 +147,7 @@ get_VCarea <- function(inputRAST,
   # Process each monthly layer
   message("\nProcessing monthly vegetation cover ratios:")
   for(i in 1:nlyr(VCRAST)) {
-    month_name = gsub("-", "_", names(VCRAST)[i])
+    month_name = gsub("-", "", names(VCRAST)[i])
     vcr_colname = paste0("VCa_", month_name)
     
     tictoc::tic(paste("Month", month_name))
