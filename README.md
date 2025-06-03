@@ -36,7 +36,7 @@ require(tictoc)       # For timing code execution
 require(tibble)       # For add_column() 
 ```
 
-Compute vegetation/canopy cover area (m2) and ratio (%) using 10m resolution annual composites (with singe-feature input vector):
+Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector):
 
 ```R
 # Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
