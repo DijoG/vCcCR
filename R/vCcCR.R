@@ -7,7 +7,7 @@
 #' @name vCcCR
 NULL
 
-#' Calculate Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)
+#' Calculates Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)
 #'
 #' @param inputRAST Path to the input raster stack (12 monthly vegetation cover layers)
 #' @param inputSHAPE Path to the input shapefile (polygons for analysis)
@@ -97,13 +97,13 @@ get_VCratio <- function(inputRAST,
   invisible(result_shp)
 }
 
-#' Calculate Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)
+#' Calculates Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)
 #'
 #' @param inputRAST Path to the input raster stack (12 monthly vegetation cover layers)
 #' @param inputSHAPE Path to the input shapefile (polygons for analysis)
 #' @param outputSHAPE Path where to save the output shapefile with VCr attributes (default = NULL ~ same as inputSHAPE with '_VCr.geojson' extension)
 #' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
-#' @return An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp 
+#' @return An sf object with added VCa columns (invisibly), writes out a .geojson and a .shp 
 #' @export 
 get_VCarea <- function(inputRAST, 
                        inputSHAPE, 
@@ -171,11 +171,11 @@ get_VCarea <- function(inputRAST,
   
   # Save results
   if (is.null(outputSHAPE)) {
-    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCr.geojson")
-    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCr.shp")
+    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCa.geojson")
+    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCa.shp")
   } else {
-    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCr.geojson")
-    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCr.shp")
+    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCa.geojson")
+    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCa.shp")
   }
   message("\nSaving output shapefile...")
   st_write(result_shp, outputSHAPEgeoj, delete_layer = TRUE, quiet = TRUE, append = FALSE)

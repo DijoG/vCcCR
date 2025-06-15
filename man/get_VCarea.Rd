@@ -2,7 +2,7 @@
 % Please edit documentation in R/vCcCR.R
 \name{get_VCarea}
 \alias{get_VCarea}
-\title{Calculate Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)}
+\title{Calculates Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)}
 \usage{
 get_VCarea(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 }
@@ -16,8 +16,8 @@ get_VCarea(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 \item{id_field}{Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)}
 }
 \value{
-An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp
+An sf object with added VCa columns (invisibly), writes out a .geojson and a .shp
 }
 \description{
-Calculate Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)
+Calculates Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)
 }

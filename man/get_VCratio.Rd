@@ -2,7 +2,7 @@
 % Please edit documentation in R/vCcCR.R
 \name{get_VCratio}
 \alias{get_VCratio}
-\title{Calculate Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)}
+\title{Calculates Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)}
 \usage{
 get_VCratio(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 }
@@ -19,5 +19,5 @@ get_VCratio(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp
 }
 \description{
-Calculate Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)
+Calculates Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)
 }
