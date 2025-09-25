@@ -215,48 +215,85 @@ get_VCarea <- function(inputRAST,
   return(poly)
 }
 
-#' Splits a large polygon into smaller sub-polygons using k-means and Voronoi tessellation.
+#' Splits a large polygon into smaller sub-polygons using ADAPTIVE grid sizing method.
 #'
 #' This is useful for processing very large polygons that might cause memory
 #' issues or be too slow for direct raster extraction.
 #'
 #' @param poly An sf object containing a single polygon.
-#' @param n_areas An integer, the desired number of sub-polygons to create.
+#' @param n_areas An integer, the desired number of sub-polygons to create, 
 #' @param id_field A character string, the name of the ID field in `poly`.
 #' @return An sf object containing the smaller split polygons, inheriting attributes from the original polygon.
 #' @noRd  
 .split_POLY <- function(poly, n_areas, id_field) {
-  # Ensure we have exactly one polygon
-  if (nrow(poly) != 1) {
-    stop("split_POLY expects a single polygon")
-  }
+  if (nrow(poly) != 1) stop("split_POLY expects a single polygon")
   
-  # Store original ID
   orig_id = poly[[id_field]]
   
-  # Sample points and create voronoi polygons
-  points = sf::st_sample(poly, size = min(200, n_areas * 50))
-  points_df = as.data.frame(sf::st_coordinates(points))
+  # Adaptive grid sizing based on polygon complexity
+  bbox = sf::st_bbox(poly)
+  width = bbox$xmax - bbox$xmin
+  height = bbox$ymax - bbox$ymin
   
-  k_means = kmeans(points_df, centers = n_areas)
-  voronoi_polys = dismo::voronoi(k_means$centers, ext = poly)
+  # Aspect ratio aware grid - better for long/narrow polygons
+  aspect_ratio = width / height
+  if (aspect_ratio > 3) {
+    # Long and narrow - more cells along the long axis
+    grid_dims = c(ceiling(sqrt(n_areas * aspect_ratio)), ceiling(sqrt(n_areas / aspect_ratio)))
+  } else if (aspect_ratio < 0.33) {
+    # Tall and narrow
+    grid_dims = c(ceiling(sqrt(n_areas * aspect_ratio)), ceiling(sqrt(n_areas / aspect_ratio)))
+  } else {
+    # Roughly square
+    grid_dims = c(ceiling(sqrt(n_areas)), ceiling(sqrt(n_areas)))
+  }
   
-  # Convert to sf and set CRS
-  voronoi_sf = sf::st_as_sf(voronoi_polys)
-  sf::st_crs(voronoi_sf) = sf::st_crs(poly)
+  # Ensure minimum dimensions
+  grid_dims = pmax(grid_dims, 2)
   
-  # Intersect with original polygon
-  splitted_poly = sf::st_intersection(voronoi_sf, poly) %>%
-    mutate(
-      PolyArea = as.numeric(sf::st_area(.)),
-      !!id_field := orig_id  # Preserve original ID
-    ) %>%
-    select(all_of(id_field), PolyArea)
+  cli::cli_alert_info("Using {grid_dims[1]}x{grid_dims[2]} grid for complex polygon")
   
-  # Ensure valid geometries and return as single polygons
-  splitted_poly = splitted_poly %>%
-    sf::st_make_valid() %>%
-    sf::st_collection_extract("POLYGON")
+  grid = sf::st_make_grid(poly, n = grid_dims)
+  grid_sf = sf::st_sf(geometry = grid)
+  sf::st_crs(grid_sf) = sf::st_crs(poly)
+  
+  # Robust intersection with complex polygons
+  splitted_poly = tryCatch({
+    result = sf::st_intersection(grid_sf, poly) %>%
+      filter(sf::st_geometry_type(.) %in% c("POLYGON", "MULTIPOLYGON")) %>%
+      mutate(
+        PolyArea = as.numeric(sf::st_area(.)),
+        !!id_field := orig_id
+      ) %>%
+      select(all_of(id_field), PolyArea) %>%
+      sf::st_make_valid() %>%
+      sf::st_collection_extract("POLYGON")
+    
+    # Filter out tiny slivers that can occur with complex shapes
+    area_threshold = max(result$PolyArea) * 0.01  # 1% of largest sub-polygon
+    result = result %>% filter(PolyArea >= area_threshold)
+    
+    result
+  }, error = function(e) {
+    cli::cli_alert_danger("Grid intersection failed: {e$message}")
+    cli::cli_alert_info("Falling back to bounding box grid")
+    
+    # Ultimate fallback - use bounding box
+    bbox_poly = sf::st_as_sfc(sf::st_bbox(poly))
+    grid = sf::st_make_grid(bbox_poly, n = c(3, 3))
+    grid_sf = sf::st_sf(geometry = grid)
+    sf::st_crs(grid_sf) = sf::st_crs(poly)
+    
+    sf::st_intersection(grid_sf, poly) %>%
+      filter(sf::st_geometry_type(.) %in% c("POLYGON", "MULTIPOLYGON")) %>%
+      mutate(
+        PolyArea = as.numeric(sf::st_area(.)),
+        !!id_field := orig_id
+      ) %>%
+      select(all_of(id_field), PolyArea) %>%
+      sf::st_make_valid() %>%
+      sf::st_collection_extract("POLYGON")
+  })
   
   return(splitted_poly)
 }
