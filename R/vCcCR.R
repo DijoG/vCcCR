@@ -287,7 +287,7 @@ get_VCarea <- function(inputRAST,
     sf::st_intersection(grid_sf, poly) %>%
       filter(sf::st_geometry_type(.) %in% c("POLYGON", "MULTIPOLYGON")) %>%
       mutate(
-        PolyArea = as.numeric(sf::st_area(.)),
+        PolyArea = round(as.numeric(sf::st_area(.)), 2),
         !!id_field := orig_id
       ) %>%
       select(all_of(id_field), PolyArea) %>%
@@ -361,7 +361,7 @@ get_VEGETATION <- function(polygons,
   
   # Calculate polygon areas if not already present
   if (!"PolyArea" %in% names(polygons)) {
-    polygons$PolyArea = as.numeric(sf::st_area(polygons))
+    polygons$PolyArea = round(as.numeric(sf::st_area(polygons)), 2)
   }
   
   # Obtain pixel size
