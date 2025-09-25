@@ -3,7 +3,7 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A powerful R package for calculating vegetation and/or canopy cover ratios from raster data for polygon features. `vCcCR` is designed to handle large polygons efficiently through intelligent splitting, preventing memory issues and speeding up analysis.
+A powerful R package for calculating vegetation and/or canopy cover ratios from raster data for polygon features. `vCcCR` is designed to handle large polygons efficiently through intelligent aspect ratio awareness splitting, preventing memory issues and speeding up analysis.
 
 ---
 
