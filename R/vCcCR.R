@@ -57,7 +57,7 @@ get_VCratio <- function(inputRAST,
   message("\nProcessing monthly vegetation cover areas:")
   for(i in 1:nlyr(VCRAST)) {
     month_name = names(VCRAST)[i]
-    vcr_colname = paste0("VCr_", month_name)
+    vcr_colname = paste0("VCr", month_name)
     
     tictoc::tic(paste("Month", month_name))
     
@@ -147,7 +147,7 @@ get_VCarea <- function(inputRAST,
   message("\nProcessing monthly vegetation cover ratios:")
   for(i in 1:nlyr(VCRAST)) {
     month_name = names(VCRAST)[i]
-    vcr_colname = paste0("VCa_", month_name)
+    vcr_colname = paste0("VCa", month_name)
     
     tictoc::tic(paste("Month", month_name))
     
@@ -365,9 +365,6 @@ get_VEGETATION <- function(polygons,
   
   # Obtain pixel size
   pix_size = terra::res(veg_raster)[1]
-  # Add result columns (initialize to NA if they don't exist, though they'll be overwritten)
-  # It's better to add them during the join, but if you need them present for other operations,
-  # ensure they are of the correct type. For this solution, we'll rely on the join.
   
   # Processing logic
   if (by_ROW) {
@@ -444,7 +441,7 @@ get_VEGETATION <- function(polygons,
           tibble::tibble(
             !!id_field := current_poly[[id_field]],
             PolyArea_calc = current_poly$PolyArea, # Store original PolyArea for later ratio calculation if needed
-            VegArea = round(veg_pixels * (0.35 * 0.35), 2)
+            VegArea = round(veg_pixels * (pix_size * pix_size), 2)
           )
         }
       )
@@ -474,7 +471,7 @@ get_VEGETATION <- function(polygons,
           tibble::tibble(
             !!id_field := current_poly[[id_field]],
             PolyArea_calc = current_poly$PolyArea, # Store original PolyArea
-            VegArea = round(veg_pixels * (0.35 * 0.35), 2)
+            VegArea = round(veg_pixels * (pix_size * pix_size), 2)
           )
         }
       )
