@@ -3,9 +3,8 @@
 #' A package for calculating vegetation and/or canopy  cover ratios from raster data for polygon features.
 #' Supports processing of large polygons through intelligent splitting.
 #'
-#' @docType package
-#' @name vCcCR
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 #' Calculates Vegetation Cover Ratio (VCr) for each month in a raster stack (annual composite of monthly mosaics)
 #'
@@ -82,16 +81,16 @@ get_VCratio <- function(inputRAST,
   
   # Save results
   if (is.null(outputSHAPE)) {
-    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCr.geojson")
-    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCr.shp")
+    outputSHAPEgpkg = paste0(sub("\\.(gpkg|geojson|shp)$", "", inputSHAPE), "_VCr.gpkg")
+    outputSHAPEshp = paste0(sub("\\.(gpkg|geojson|shp)$", "", inputSHAPE), "_VCr.shp")
   } else {
-    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCr.geojson")
-    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCr.shp")
+    outputSHAPEgpkg = paste0(sub("\\.(gpkg|geojson|shp)$", "", outputSHAPE), "_VCr.gpkg")
+    outputSHAPEshp = paste0(sub("\\.(gpkg|geojson|shp)$", "", outputSHAPE), "_VCr.shp")
   }
-  message("\nSaving output shapefile...")
-  st_write(result_shp, outputSHAPEgeoj, delete_layer = TRUE, quiet = TRUE, append = FALSE)
-  st_write(result_shp, outputSHAPEshp, delete_layer = TRUE, quiet = TRUE, append = FALSE)
-  message("Successfully saved to:\n", normalizePath(outputSHAPEgeoj), "\n", normalizePath(outputSHAPEshp))
+  message("\nSaving output files...")
+  st_write(result_shp, outputSHAPEgpkg, delete_layer = TRUE, quiet = TRUE)
+  st_write(result_shp, outputSHAPEshp, delete_layer = TRUE, quiet = TRUE)
+  message("Successfully saved to:\n", normalizePath(outputSHAPEgpkg), "\n", normalizePath(outputSHAPEshp))
   
   # Return the sf object invisibly
   invisible(result_shp)
@@ -171,16 +170,16 @@ get_VCarea <- function(inputRAST,
   
   # Save results
   if (is.null(outputSHAPE)) {
-    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCa.geojson")
-    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", inputSHAPE), "_VCa.shp")
+    outputSHAPEgpkg = paste0(sub("\\.(gpkg|geojson|shp)$", "", inputSHAPE), "_VCa.gpkg")
+    outputSHAPEshp = paste0(sub("\\.(gpkg|geojson|shp)$", "", inputSHAPE), "_VCa.shp")
   } else {
-    outputSHAPEgeoj = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCa.geojson")
-    outputSHAPEshp = paste0(sub("\\.(geojson|shp)$", "", outputSHAPE), "_VCa.shp")
+    outputSHAPEgpkg = paste0(sub("\\.(gpkg|geojson|shp)$", "", outputSHAPE), "_VCa.gpkg")
+    outputSHAPEshp = paste0(sub("\\.(gpkg|geojson|shp)$", "", outputSHAPE), "_VCa.shp")
   }
-  message("\nSaving output shapefile...")
-  st_write(result_shp, outputSHAPEgeoj, delete_layer = TRUE, quiet = TRUE, append = FALSE)
-  st_write(result_shp, outputSHAPEshp, delete_layer = TRUE, quiet = TRUE, append = FALSE)
-  message("Successfully saved to:\n", normalizePath(outputSHAPEgeoj), "\n", normalizePath(outputSHAPEshp))
+  message("\nSaving output files...")
+  st_write(result_shp, outputSHAPEgpkg, delete_layer = TRUE, quiet = TRUE)
+  st_write(result_shp, outputSHAPEshp, delete_layer = TRUE, quiet = TRUE)
+  message("Successfully saved to:\n", normalizePath(outputSHAPEgpkg), "\n", normalizePath(outputSHAPEshp))
   
   # Return the sf object invisibly
   invisible(result_shp)
