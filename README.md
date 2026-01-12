@@ -21,18 +21,9 @@ devtools::install_github("DijoG/vCcCR")
 
 ## Usage example
 
-Dependencies:
+Following dependencies are required:
 
-`terra`         # For raster data handling
-`sf`            # For spatial vector data handling
-`exactextractr` # For fast raster exact extraction
-`dplyr`         # For data manipulation (e.g., mutate, filter, group_by, summarise)
-`progress`      # For progress bars
-`cli`           # For formatted command-line output
-`rlang`         # For quosures and unquoting (e.g., !!sym)
-`purrr`         # For functional programming (e.g., map, map_dfr)
-`tictoc`        # For timing code execution
-`tibble`        # For add_column() 
+`terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`,`tibble` 
 
 Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector):
 
