@@ -23,7 +23,7 @@ devtools::install_github("DijoG/vCcCR")
 
 Following dependencies are required:
 
-`terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`,`tibble` 
+`terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`, `tibble` 
 
 Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector):
 
