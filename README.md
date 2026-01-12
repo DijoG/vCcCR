@@ -24,16 +24,16 @@ devtools::install_github("DijoG/vCcCR")
 Import dependencies:
 
 ```R
-require(terra)        # For raster data handling
-require(sf)           # For spatial vector data handling
-require(exactextractr) # For fast raster exact extraction
-require(dplyr)        # For data manipulation (e.g., mutate, filter, group_by, summarise)
-require(progress)     # For progress bars
-require(cli)          # For formatted command-line output
-require(rlang)        # For quosures and unquoting (e.g., !!sym)
-require(purrr)        # For functional programming (e.g., map, map_dfr)
-require(tictoc)       # For timing code execution
-require(tibble)       # For add_column() 
+library(terra)        # For raster data handling
+library(sf)           # For spatial vector data handling
+library(exactextractr) # For fast raster exact extraction
+library(dplyr)        # For data manipulation (e.g., mutate, filter, group_by, summarise)
+library(progress)     # For progress bars
+library(cli)          # For formatted command-line output
+library(rlang)        # For quosures and unquoting (e.g., !!sym)
+library(purrr)        # For functional programming (e.g., map, map_dfr)
+library(tictoc)       # For timing code execution
+library(tibble)       # For add_column() 
 ```
 
 Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector):
