@@ -14,7 +14,7 @@ A powerful R package for calculating vegetation and/or canopy cover ratios from 
 
 - Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
 - Input vector file can be either single or multi-feauture
-- Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
+- Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{date} 
 attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats
 
 ## Installation
