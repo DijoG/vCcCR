@@ -37,7 +37,7 @@ vCcCR::get_VCarea(
   inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
   inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.gpkg", 
   outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN")
-# Otputs: 22052025_Riyadh_METROPOLITAN_VCa.gpkg and 22052025_Riyadh_METROPOLITAN_VCa.shp
+# Outputs: 22052025_Riyadh_METROPOLITAN_VCa.gpkg and 22052025_Riyadh_METROPOLITAN_VCa.shp
 ```
 
 ### 2) Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites (with multi-feature input vector) 
@@ -48,7 +48,7 @@ vCcCR::get_VCratio(
   inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/GRP_ARABIC_DISSsel.gpkg", 
   outputSHAPE = ".../test/GRP_ARABIC_DISSsel02",
   id_field = "NAME_ENGLI")     # Name of the multi-feature spatial field to compute VC ratio to
-# Otputs: GRP_ARABIC_DISSsel02_VCr.gpkg and GRP_ARABIC_DISSsel02_VCr.shp
+# Outputs: GRP_ARABIC_DISSsel02_VCr.gpkg and GRP_ARABIC_DISSsel02_VCr.shp
 ```
 
 ### 3) Compute vegetation/canopy cover ratio (%) using hight (0.3m) resolution binarized raster file (with multi-feature complex vector) 
