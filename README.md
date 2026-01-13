@@ -29,11 +29,11 @@ Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution an
 
 ```R
 # Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
-# Output is the updated inputSHAPE (here a single-feature vector file) with the computed VCa_date or VCr_date attributes)
+# Output is the updated inputSHAPE (here a single-feature vector file) with the computed VCa`date` or VCr`date` attributes) in gpkg and shp formats
 vCcCR::get_VCarea(
                inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
-               inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.geojson", 
-               outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN.geojson")
+               inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.gpkg", 
+               outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN")
 ```
 
 Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites (with multi-feature input vector):
@@ -41,8 +41,8 @@ Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites
 ```R
 vCcCR::get_VCratio(
                inputRAST = ".../VC_2024/VC_Annual_2024_thr_0_15.tif",
-               inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/05112024_GRP_ARABIC — 20241105_GRP_ARABIC_DISSsel02.geojson", 
-               outputSHAPE = ".../test/05112024_GRP_ARABIC — 20241105_GRP_ARABIC_DISSsel02.geojson",
+               inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/05112024_GRP_ARABIC — 20241105_GRP_ARABIC_DISSsel02.gpkg", 
+               outputSHAPE = ".../test/05112024_GRP_ARABIC — 20241105_GRP_ARABIC_DISSsel02",
                id_field = "NAME_ENGLI")
 ```
 
