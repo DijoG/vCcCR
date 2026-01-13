@@ -16,7 +16,7 @@ get_VCarea(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 \item{id_field}{Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)}
 }
 \value{
-An sf object with added VCa columns (invisibly), writes out a .geojson and a .shp
+An sf object with added VCa columns (invisibly), writes out a .gpkg and a .shp
 }
 \description{
 Calculates Vegetation Cover Area (VCa) for each month in a raster stack (annual composite of monthly mosaics)

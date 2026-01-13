@@ -12,7 +12,7 @@
 #' @param inputSHAPE Path to the input shapefile (polygons for analysis)
 #' @param outputSHAPE Path and name (without file extension!) where to save the output spatial files in gpkg and shp formats (default = NULL ~ same as inputSHAPE with '_VCr.gpkg' extension)
 #' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
-#' @return An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp 
+#' @return An sf object with added VCr columns (invisibly), writes out a .gpkg and a .shp 
 #' @export 
 get_VCratio <- function(inputRAST, 
                         inputSHAPE, 
@@ -102,7 +102,7 @@ get_VCratio <- function(inputRAST,
 #' @param inputSHAPE Path to the input shapefile (polygons for analysis)
 #' @param outputSHAPE Path and name (without file extension!) where to save the output spatial files in gpkg and shp formats (default = NULL ~ same as inputSHAPE with '_VCr.gpkg' extension)
 #' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
-#' @return An sf object with added VCa columns (invisibly), writes out a .geojson and a .shp 
+#' @return An sf object with added VCa columns (invisibly), writes out a .gpkg and a .shp 
 #' @export 
 get_VCarea <- function(inputRAST, 
                        inputSHAPE, 
