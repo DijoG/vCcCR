@@ -5,7 +5,16 @@
 
 A powerful R package for calculating vegetation and/or canopy cover ratios from raster data for polygon features. `vCcCR` is designed to handle large polygons efficiently through intelligent aspect ratio awareness splitting, preventing memory issues and speeding up analysis.
 
----
+
+## Dependencies
+
+`terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`, `tibble` 
+
+## Input & Output
+
+- Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
+- Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
+attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats
 
 ## Installation
 
@@ -18,16 +27,7 @@ You can install the development version of `vCcCR` directly from GitHub using `d
 # Install vCcCR
 devtools::install_github("DijoG/vCcCR")
 ```
-
 ## Usage example
-
-Following dependencies are required:
-
-`terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`, `tibble` 
-
-- Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
-- Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
-attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats
 
 ### 1) Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector) 
 
