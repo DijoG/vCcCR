@@ -50,7 +50,7 @@ vCcCR::get_VCratio(
 # Otputs: GRP_ARABIC_DISSsel02_VCr.gpkg and GRP_ARABIC_DISSsel02_VCr.shp
 ```
 
-Compute vegetation/canopy cover ratio (%) using 0.35/0.3 resolution binarized raster file (with multi-feature complex vector):
+Compute vegetation/canopy cover ratio (%) using hight (0.3m) resolution binarized raster file (with multi-feature complex vector):
 
 ```R
 # A multi-featured mixed (large and small) vector file whose features are POLYGON
