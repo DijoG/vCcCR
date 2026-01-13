@@ -49,7 +49,7 @@ vCcCR::get_VCarea(
   outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN")
 # Outputs: 22052025_Riyadh_METROPOLITAN_VCa.gpkg and 22052025_Riyadh_METROPOLITAN_VCa.shp
 ```
-### 3) Compute vegetation/canopy cover ratio (%) using hight (0.3m) resolution binarized raster file (with multi-feature complex vector) 
+### 3) Compute vegetation/canopy cover ratio (%) using 0.3m resolution binarized raster file (with multi-feature complex vector) 
 
 ```R
 # A multi-featured mixed (large and small) vector file whose features are POLYGON
