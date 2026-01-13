@@ -11,7 +11,7 @@ get_VCarea(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 
 \item{inputSHAPE}{Path to the input shapefile (polygons for analysis)}
 
-\item{outputSHAPE}{Path where to save the output shapefile with VCr attributes (default = NULL ~ same as inputSHAPE with '_VCr.geojson' extension)}
+\item{outputSHAPE}{Path and name (without file extension!) where to save the output spatial files in gpkg and shp formats (default = NULL ~ same as inputSHAPE with '_VCr.gpkg' extension)}
 
 \item{id_field}{Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)}
 }

@@ -10,7 +10,7 @@
 #'
 #' @param inputRAST Path to the input raster stack (12 monthly vegetation cover layers)
 #' @param inputSHAPE Path to the input shapefile (polygons for analysis)
-#' @param outputSHAPE Path where to save the output shapefile with VCr attributes (default = NULL ~ same as inputSHAPE with '_VCr.geojson' extension)
+#' @param outputSHAPE Path and name (without file extension!) where to save the output spatial files in gpkg and shp formats (default = NULL ~ same as inputSHAPE with '_VCr.gpkg' extension)
 #' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
 #' @return An sf object with added VCr columns (invisibly), writes out a .geojson and a .shp 
 #' @export 
@@ -100,7 +100,7 @@ get_VCratio <- function(inputRAST,
 #'
 #' @param inputRAST Path to the input raster stack (12 monthly vegetation cover layers)
 #' @param inputSHAPE Path to the input shapefile (polygons for analysis)
-#' @param outputSHAPE Path where to save the output shapefile with VCr attributes (default = NULL ~ same as inputSHAPE with '_VCr.geojson' extension)
+#' @param outputSHAPE Path and name (without file extension!) where to save the output spatial files in gpkg and shp formats (default = NULL ~ same as inputSHAPE with '_VCr.gpkg' extension)
 #' @param id_field Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)
 #' @return An sf object with added VCa columns (invisibly), writes out a .geojson and a .shp 
 #' @export 
