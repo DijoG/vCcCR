@@ -13,6 +13,7 @@ A powerful R package for calculating vegetation and/or canopy cover ratios from 
 ## Input & Output
 
 - Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
+- Input vector file can be either single or multi-feauture
 - Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
 attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats
 
@@ -33,9 +34,9 @@ devtools::install_github("DijoG/vCcCR")
 
 ```R
 vCcCR::get_VCarea(
-               inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
-               inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.gpkg", 
-               outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN")
+  inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
+  inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.gpkg", 
+  outputSHAPE = ".../test/22052025_Riyadh_METROPOLITAN")
 # Otputs: 22052025_Riyadh_METROPOLITAN_VCa.gpkg and 22052025_Riyadh_METROPOLITAN_VCa.shp
 ```
 
@@ -43,10 +44,10 @@ vCcCR::get_VCarea(
 
 ```R
 vCcCR::get_VCratio(
-               inputRAST = ".../VC_2024/VC_Annual_2024_thr_0_15.tif",
-               inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/GRP_ARABIC_DISSsel.gpkg", 
-               outputSHAPE = ".../test/GRP_ARABIC_DISSsel02",
-               id_field = "NAME_ENGLI")
+  inputRAST = ".../VC_2024/VC_Annual_2024_thr_0_15.tif",
+  inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/GRP_ARABIC_DISSsel.gpkg", 
+  outputSHAPE = ".../test/GRP_ARABIC_DISSsel02",
+  id_field = "NAME_ENGLI")     # Name of the multi-feature spatial field to compute VC ratio to
 # Otputs: GRP_ARABIC_DISSsel02_VCr.gpkg and GRP_ARABIC_DISSsel02_VCr.shp
 ```
 
@@ -65,13 +66,13 @@ VCR <- terra::rast(".../VC_EPSG32638.tif")
 # Run the vegetation/canopy ratio (%) computation:
 tic("Total Vegetation Processing Time")
 vCcCR::get_VEGETATION(
-            polygons = POLY, 
-            veg_raster = VCR,
-            output_path = ".../CC_resultest.gpkg",
-            split_threshold = 1850000,   # Polygons > 1.85 km^2 will be split in n_areas
-            n_areas = 4,                 # Large polygons into n_areas sub-areas
-            id_field = "NAME_ENGLI"      # Column name for polygon IDs
-            by_ROW = TRUE                # Only if you have a a very large POLY with hundreds of features
+  polygons = POLY, 
+  veg_raster = VCR,
+  output_path = ".../CC_resultest.gpkg",
+  split_threshold = 1850000,   # Polygons > 1.85 km^2 will be split in n_areas
+  n_areas = 4,                 # Large polygons into n_areas sub-areas
+  id_field = "NAME_ENGLI"      # Column name for polygon IDs
+  by_ROW = TRUE                # Only if you have a a very large POLY with hundreds of features
 )
 toc()
 # Total Vegetation Processing Time: 1688.43 sec elapsed
