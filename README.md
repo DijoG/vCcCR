@@ -25,11 +25,11 @@ Following dependencies are required:
 
 `terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`, `tibble` 
 
-**Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else). 
-Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
-attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats.**
+- Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
+- Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
+attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats
 
-#### 1 ~ Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector) ~
+### 1) Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector) 
 
 ```R
 vCcCR::get_VCarea(
@@ -39,7 +39,7 @@ vCcCR::get_VCarea(
 # Otputs: 22052025_Riyadh_METROPOLITAN_VCa.gpkg and 22052025_Riyadh_METROPOLITAN_VCa.shp
 ```
 
-#### 2 ~ Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites (with multi-feature input vector) ~
+### 2) Compute vegetation/canopy cover ratio (%) using 10m resolution annual composites (with multi-feature input vector) 
 
 ```R
 vCcCR::get_VCratio(
@@ -50,7 +50,7 @@ vCcCR::get_VCratio(
 # Otputs: GRP_ARABIC_DISSsel02_VCr.gpkg and GRP_ARABIC_DISSsel02_VCr.shp
 ```
 
-#### 3 ~ Compute vegetation/canopy cover ratio (%) using hight (0.3m) resolution binarized raster file (with multi-feature complex vector) ~
+### 3) Compute vegetation/canopy cover ratio (%) using hight (0.3m) resolution binarized raster file (with multi-feature complex vector) 
 
 ```R
 # A multi-featured mixed (large and small) vector file whose features are POLYGON
