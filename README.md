@@ -25,14 +25,13 @@ Following dependencies are required:
 
 `terra`, `sf`, `exactextractr`, `dplyr`, `progress`, `cli`, `rlang`, `purrr`, `tictoc`, `tibble` 
 
-*Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else) 
-Output is the updated inputSHAPE (here a single-feature vector file with the computed VCa{date} or VCr{outputSHAPE} 
-attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats.*
+**Input raster is an annual composite of mounthly mosaics (value 1 for vegetation/canopy, 0 for anything else). 
+Output is the updated inputSHAPE (the vector file with the computed VCa{date} or VCr{outputSHAPE} 
+attributes) in {outputSHAPE}_VCr.gpkg - GeoPackage and {outputSHAPE}_VCr.shp - Shapefile formats.**
 
 Compute vegetation/canopy cover area (m2) and  ratio (%) using 10m resolution annual composites (with singe-feature input vector):
 
 ```R
-
 vCcCR::get_VCarea(
                inputRAST = ".../VC_Annual_2024_thr_0_15.tif",
                inputSHAPE = ".../02032025_Riyadh_METROPOLITAN.gpkg", 
