@@ -37,7 +37,7 @@ vCcCR::get_VCratio(
   inputRAST = ".../VC_2024/VC_Annual_2024_thr_0_15.tif",
   inputSHAPE = ".../0_2_Green Riyadh Project Boundaries/GRP_ARABIC_DISSsel.gpkg", 
   outputSHAPE = ".../test/GRP_ARABIC_DISSsel02",
-  id_field = "NAME_ENGLI")     # Name of the multi-feature spatial field to compute VC ratio to
+  id_field = c("NAME_ENGLI", "GR_PROJECT"))    # Attrinute names to keep
 # Outputs: GRP_ARABIC_DISSsel02_VCr.gpkg and GRP_ARABIC_DISSsel02_VCr.shp
 ```
 ### 2) Compute vegetation/canopy cover area (m2) using 10m resolution annual composites (with singe-feature input vector) 

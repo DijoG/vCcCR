@@ -13,7 +13,7 @@ get_VCarea(inputRAST, inputSHAPE, outputSHAPE = NULL, id_field = NULL)
 
 \item{outputSHAPE}{Path and name (without file extension!) where to save the output spatial files in gpkg and shp formats (default = NULL ~ same as inputSHAPE with '_VCr.gpkg' extension)}
 
-\item{id_field}{Attribute name or id to keep, all other fields are removed (default = NULL ~ keeping first attribute)}
+\item{id_field}{Attribute name(s) to keep, all other fields are removed (default = NULL ~ keeping first attribute)}
 }
 \value{
 An sf object with added VCa columns (invisibly), writes out a .gpkg and a .shp
